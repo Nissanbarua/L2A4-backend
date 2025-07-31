@@ -5,11 +5,15 @@ import { borrowRoutes } from "./routes/borrow.route";
 
 const app = express();
 
-app.use(cors());
 app.use(express.json());
+app.use(
+  cors({
+    origin: ['http://localhost:5173', 'https://library-frontend-pearl.vercel.app']
+   })
+);
 
 app.use("/api/books", bookRoutes);
-app.use("/api/borrow", borrowRoutes);
+app.use("/api", borrowRoutes);
 app.get("/", (req, res) => {
   res.send("Library API is running");
 });
